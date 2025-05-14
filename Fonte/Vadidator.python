@@ -1,0 +1,48 @@
+import re
+import random
+from datetime import datetime, timedelta
+
+def validar_bandeira(numero_cartao):
+    bandeiras = [
+        ("Visa", r"^4[0-9]{12}(?:[0-9]{3})?$"),
+        ("MasterCard", r"^(5[1-5][0-9]{14}|2(2[2-9][0-9]{12}|[3-6][0-9]{13}|7[01][0-9]{12}|720[0-9]{12}))$"),
+        ("Elo", r"^(4011|4312|4389|45|50|627780|636297|636368)[0-9]*$"),
+        ("American Express", r"^3[47][0-9]{13}$"),
+        ("Discover", r"^(6011|65|64[4-9])[0-9]*$"),
+        ("Hipercard", r"^6062[0-9]*$"),
+        ("Diners Club", r"^3(?:0[0-5]|[68][0-9])[0-9]{11}$"),
+        ("EnRoute", r"^2(?:014|149)[0-9]{11}$"),
+        ("JCB", r"^(?:2131|1800|35[0-9]{3})[0-9]{11}$"),
+        ("Voyager", r"^8699[0-9]{11}$"),
+        ("Aura", r"^50[0-9]{14,17}$")
+    ]
+
+    for nome, padrao in bandeiras:
+        if re.match(padrao, numero_cartao):
+            return nome
+    return "Bandeira não suportada ou número inválido."
+
+def gerar_data_validade():
+    anos_no_futuro = random.randint(1, 5)
+    data_futura = datetime.now().replace(day=1) + timedelta(days=365 * anos_no_futuro)
+    return data_futura.strftime("%m/%y")
+
+def gerar_cvv(bandeira):
+    if bandeira == "American Express":
+        return f"{random.randint(0, 9999):04d}"  # CVV com 4 dígitos
+    else:
+        return f"{random.randint(0, 999):03d}"   # CVV com 3 dígitos
+
+def main():
+    numero_cartao = "370623013947503"  # Substitua por outro número para testar
+    bandeira = validar_bandeira(numero_cartao)
+    print(f"Bandeira do cartão: {bandeira}")
+
+    if bandeira != "Bandeira não suportada ou número inválido.":
+        validade = gerar_data_validade()
+        cvv = gerar_cvv(bandeira)
+        print(f"Data de validade: {validade}")
+        print(f"CVV: {cvv}")
+
+if __name__ == "__main__":
+    main()
