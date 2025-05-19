@@ -1,6 +1,6 @@
 # 🐍Explicação do Código 'Vadidator.py'
 
-O código `Vadidator.py` é um programa em Java que valida a bandeira de um cartão de crédito com base no número fornecido, além de gerar uma data de validade e um código de segurança (CVV) fictícios. Abaixo está a explicação detalhada de cada parte do código.
+O código `Vadidator.py` é um programa em Python que valida a bandeira de um cartão de crédito com base no número fornecido, além de gerar uma data de validade e um código de segurança (CVV) fictícios. Abaixo está a explicação detalhada de cada parte do código.
 
 ---
 
